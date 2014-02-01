@@ -98,12 +98,13 @@ app.get('/adduser/:id', function(req, res) {
 */
   https.get("https://apis.scottylabs.org/v1/directory/andrewid/rparen?app_id=4dc26847-3962-47a6-aa50-dcd650e900b1&app_secret_key=_gH91EeosouyjtswFjR3SsmmCJkOWF93Lxb2LO1qdieZTpUqToYxGX4k", function(res1) {
    res1.on('data', function (chunk) {
-     res.send(chunk);
+     str += chunk;
    });
    //res.send(res1.statusCode);
 }).on('error', function(e) {
    res.send('hai');
 });
+  res.send(str);
  
   //then add new_user to mongo
   //users.insert(new_user, {safe : trust}, function (err, records) {
