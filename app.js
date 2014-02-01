@@ -79,28 +79,31 @@ app.post('/adduser/:id', function(req, res) {
   var query = {'id': req.params.id};
   var key = '';
   var value = '';
+  console.log(req.body.likes);
+  var parsed = JSON.parse(req.body.likes);
+  console.log(parsed);
   var new_user = {'id' : req.body.id,
                   'fname' : req.body.fname,
                   'lname' : req.body.lname,
                   'hairColor' : req.body.hairColor,
 		  'height' : req.body.height,
                   'andrew' : req.body.andrew,
-                  'likes' : req.body.likes
+                  'likes' : parsed
                  };
 
   //now also add stuff to new_user from direcory
   request.get("https://apis.scottylabs.org/v1/directory/andrewid/"+ req.body.andrew +"?app_id=4dc26847-3962-47a6-aa50-dcd650e900b1&app_secret_key=_gH91EeosouyjtswFjR3SsmmCJkOWF93Lxb2LO1qdieZTpUqToYxGX4k", function(response1) {
-  //res.send(response1.body);
-  var p = response1.body;
-  var year = p.person.student_class;
-  var d  = p.person.department;
-  new_user['year'] = year;
-  new_user['dept'] = d;
-  res.send(new_user);
-  users.insert(new_user, {safe : true}, function (err, records) {
-	res.send(new_user);
-	});
-	});
+    //res.send(response1.body);
+    var p = response1.body;
+    var year = p.person.student_class;
+    var d  = p.person.department;
+    new_user['year'] = year;
+    new_user['dept'] = d;
+    res.send(new_user);
+    users.insert(new_user, {safe : true}, function (err, records) {
+      res.send(new_user);
+    });
+  });
  
   //then add new_user to mongo
   //users.insert(new_user, {safe : trust}, function (err, records) {
@@ -135,8 +138,27 @@ app.get('/compare/:id1/:id2', function(req,res) {
   var query2 = {'id': req.params.id2};
   //get big list of likes for each user
   //the above id is the id linked with their fb account 
-
-  var user1 = users.find(query1)
+  users.find(query1, {}, function(e, user1) {
+     if (typeof(user1[0]['likes']) !== "undefined"){
+       var list1 = JSON.parse(user1[0]['likes']);
+       users.find(query2, {}, function(e, user2){
+	 var list2 = JSON.parse(user2[0]['likes']);
+	 var simlikes = [];
+	 for (var item1 in list1) {
+           for(var item2 in list2) {
+             if (item1['name'] == item2['name'] && item1['category'] == item2['category']) {
+               simlikes.push(item1);    
+             }
+           } 
+	 }
+	 res.send(simlikes);
+       });
+     } //end of second users
+    else {
+      res.send('Error boo :(');
+    }
+  });//end of first users
+/*  var user1 = users.find(query1)
   var list1 = JSON.parse(user1[0]['likes']);
   var user2 = users.find(query2)
   var list2 = JSON.parse(user2[0]['likes']);
@@ -150,6 +172,7 @@ app.get('/compare/:id1/:id2', function(req,res) {
     };
   };
   res.send(simlikes) 
+*/
 });
  //then either i can do something with simlikes arr or kevin can... like i just 
 // give him top 5 elems maybe. or os side decides on how many from their side?
