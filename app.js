@@ -61,16 +61,16 @@ app.get('/logincheck/:id', function(req, res) {
       //var object = {id : req.body.id, info : req.body.info};
       //users.insert(object, {safe : true}, function(err, records) {
 	//res.send(object);
-      res.send({'result' : '0'});
+      res.send([{'result' : '0'}]);
       }
     else {
-      res.send({'result' : '1'});
+      res.send([{'result' : '1'}]);
     }
   });
 });
 
 
-app.get('/adduser/:id', function(req, res) {
+app.post('/adduser/:id', function(req, res) {
     //need to get user inf from request
     //everything is in req.body.id
     //i want to loop through everything in req.body and add in object to put in mongo
@@ -79,28 +79,28 @@ app.get('/adduser/:id', function(req, res) {
   var query = {'id': req.params.id};
   var key = '';
   var value = '';
-/*  var new_user = {'id' : req.body.id,
+  var new_user = {'id' : req.body.id,
                   'fname' : req.body.fname,
                   'lname' : req.body.lname,
-                  'info' : req.body.info
+                  'info' : req.body.info,
+                  'andrew' : req.body.andrew
                  };
-*/
-  //now also add stuff to new_user from direcory
-/*  var options = {
-    host: 'https://apis.scottylabs.org',
-    path: '/v1/directory/andrewid/rparen?app_id=4dc26847-3962-47a6-aa50-dcd650e900b1&app_secret_key=_gH91EeosouyjtswFjR3SsmmCJkOWF93Lxb2LO1qdieZTpUqToYxGX4k'
-    };
-  callback = function(response) {
-    var str='hai';
-    res.send(response);
-    console.log(str);
-  }; 
 
-  http.request(options, callback).end();
-*/
-  request.get("https://apis.scottylabs.org/v1/directory/andrewid/rparen?app_id=4dc26847-3962-47a6-aa50-dcd650e900b1&app_secret_key=_gH91EeosouyjtswFjR3SsmmCJkOWF93Lxb2LO1qdieZTpUqToYxGX4k", function(response1) {
-  res.send(response1.body.email);
-});
+  var try1 = {'test1' : "hai"}
+  //now also add stuff to new_user from direcory
+  request.get("https://apis.scottylabs.org/v1/directory/andrewid/"+ req.body.andrew +"?app_id=4dc26847-3962-47a6-aa50-dcd650e900b1&app_secret_key=_gH91EeosouyjtswFjR3SsmmCJkOWF93Lxb2LO1qdieZTpUqToYxGX4k", function(response1) {
+  //res.send(response1.body);
+  var p = response1.body;
+  var year = p.person.student_class;
+  var d  = p.person.department;
+  new_user['year'] = year;
+  new_user['dept'] = d;
+  //var disp1 = p['email'];
+  res.send(new_user);
+  users.insert(new_user, {safe : true}, function (err, records) {
+	res.send(new_user);
+	});
+	});
  
   //then add new_user to mongo
   //users.insert(new_user, {safe : trust}, function (err, records) {
@@ -128,7 +128,7 @@ app.get('/getinfo/:id', function(req, res) {
 });
 
 
-app.post('/compare/:id1/:id2', function(req,res) {
+app.get('/compare/:id1/:id2', function(req,res) {
   var users = db.get('users');
   var query1 = {'id': req.params.id1};
   var query2 = {'id': req.params.id2};
