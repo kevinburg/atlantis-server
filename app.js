@@ -18,7 +18,7 @@ app.get('/', function(req, res) {
   users.find({}, {}, function(e, docs) {
     res.send(docs);
   });
-//  http.request("https://apis.scottylabs.org/v1/directory/andrewid/rparen?app_id=625667e2-4e63-488d-9d39-d0758c418ec2&app_secret_key=5zQbE5kkVCJTBD9aQywLpvKyAI-mtXKcdLUw3gRTETmK8jRCF83TefBe", function(res1) {
+//  http.request("https://apis.scottylabs.org/v1/directory/andrewid/rparen?app_id=4dc26847-3962-47a6-aa50-dcd650e900b1&app_secret_key=_gH91EeosouyjtswFjR3SsmmCJkOWF93Lxb2LO1qdieZTpUqToYxGX4k", function(res1) {
   //  res.send(res1)
 //}).end(); 
 });
@@ -86,7 +86,7 @@ app.get('/adduser/:id', function(req, res) {
   //now also add stuff to new_user from direcory
   var options = {
     host: 'https://apis.scottylabs.org',
-    path: '/v1/directory/andrewid/rparen?app_id=625667e2-4e63-488d-9d39-d0758c418ec2&app_secret_key=5zQbE5kkVCJTBD9aQywLpvKyAl-mtXKcdLUw3gRTETmK8jRCF83TefBe'
+    path: '/v1/directory/andrewid/rparen?app_id=4dc26847-3962-47a6-aa50-dcd650e900b1&app_secret_key=_gH91EeosouyjtswFjR3SsmmCJkOWF93Lxb2LO1qdieZTpUqToYxGX4k'
     };
   callback = function(response) {
     var str='hai';
@@ -94,7 +94,7 @@ app.get('/adduser/:id', function(req, res) {
     console.log(str);
   }; 
 
-  http.request(options, callback);
+  http.request(options, callback).end();
 
  
   //then add new_user to mongo
