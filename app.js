@@ -87,12 +87,23 @@ app.post('/adduser/:id', function(req, res) {
   //users.insert(object, {safe : true}, function(err, records) {
   //res.send(object);
   
-  
   //now also add stuff to new_user from direcory
-  
+  var options = {
+    host: 'https://apis.scottylabs.org'
+    path: '/v1/directory/andrewid/rparen?app_id=625667e2-4e63-488d-9d39-d0758c418ec2&app_secret_key=5zQbE5kkVCJTBD9aQywLpvKyAl-mtXKcdLUw3gRTETmK8jRCF83TefBe'
+    };
+  callback = function(response) {
+    var str='hai';
+    res.send(response);
+    console.log(str);
+  } 
+
+  http.request(options, callback).end();
+
+ 
   //then add new_user to mongo
-  users.insert(new_user, {safe : trust}, function (err, records) {
-  res.send(new_user)
+  //users.insert(new_user, {safe : trust}, function (err, records) {
+  //res.send(new_user)
   });
 });
 
