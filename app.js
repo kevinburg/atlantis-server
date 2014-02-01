@@ -67,7 +67,7 @@ app.get('/logincheck/:id', function(req, res) {
   });
 });
 
-/*
+
 app.post('/adduser/:id', function(req, res) {
     //need to get user inf from request
     //everything is in req.body.id
@@ -85,7 +85,7 @@ app.post('/adduser/:id', function(req, res) {
   
   //now also add stuff to new_user from direcory
   var options = {
-    host: 'https://apis.scottylabs.org'
+    host: 'https://apis.scottylabs.org',
     path: '/v1/directory/andrewid/rparen?app_id=625667e2-4e63-488d-9d39-d0758c418ec2&app_secret_key=5zQbE5kkVCJTBD9aQywLpvKyAl-mtXKcdLUw3gRTETmK8jRCF83TefBe'
     };
   callback = function(response) {
@@ -102,7 +102,7 @@ app.post('/adduser/:id', function(req, res) {
   //res.send(new_user)
   //});
 });
-*/
+
 
 //GOOD WOO
 app.get('/getinfo/:id', function(req, res) {
