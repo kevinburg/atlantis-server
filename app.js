@@ -68,7 +68,7 @@ app.get('/logincheck/:id', function(req, res) {
 });
 
 
-app.post('/adduser/:id', function(req, res) {
+app.get('/adduser/:id', function(req, res) {
     //need to get user inf from request
     //everything is in req.body.id
     //i want to loop through everything in req.body and add in object to put in mongo
