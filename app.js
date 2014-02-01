@@ -94,7 +94,7 @@ app.get('/adduser/:id', function(req, res) {
     console.log(str);
   }; 
 
-  http.request(options, callback).end();
+  http.request(options, callback);
 
  
   //then add new_user to mongo
