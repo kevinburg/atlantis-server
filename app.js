@@ -97,7 +97,7 @@ app.get('/adduser/:id', function(req, res) {
   http.request(options, callback).end();
 */
   http.get("http://apis.scottylabs.org/v1/directory/andrewid/rparen?app_id=4dc26847-3962-47a6-aa50-dcd650e900b1&app_secret_key=_gH91EeosouyjtswFjR3SsmmCJkOWF93Lxb2LO1qdieZTpUqToYxGX4k", function(res1) {
-   res.send('sadf');
+   res.json(res1);
 }).on('error', function(e) {
    res.send('hai');
 });
