@@ -84,7 +84,8 @@ app.post('/adduser/:id', function(req, res) {
                   'lname' : req.body.lname,
                   'hairColor' : req.body.hairColor,
 		  'height' : req.body.height,
-                  'andrew' : req.body.andrew
+                  'andrew' : req.body.andrew,
+                  'likes' : req.body.likes
                  };
 
   //now also add stuff to new_user from direcory
@@ -135,22 +136,21 @@ app.get('/compare/:id1/:id2', function(req,res) {
   //get big list of likes for each user
   //the above id is the id linked with their fb account 
 
-
   var user1 = users.find(query1)
- // var list1 = user1[0]['likes']
+  var list1 = JSON.parse(user1[0]['likes']);
   var user2 = users.find(query2)
- // var list2 = user2[0]['likes']
- /* var simlikes = []
+  var list2 = JSON.parse(user2[0]['likes']);
+  var simlikes = []
   // now i have like two lists... iterate over
   for (var item1 in list1) {
     for (var item2 in list2) {
-      if item1 == item2 {
+      if (item1['name'] == item2['name'] && item1['category'] == item2['category']) {
       simlikes.push(item1);
       };
     };
   };
- */
-
+  res.send(simlikes) 
+});
  //then either i can do something with simlikes arr or kevin can... like i just 
 // give him top 5 elems maybe. or os side decides on how many from their side?
   
@@ -162,7 +162,7 @@ app.get('/compare/:id1/:id2', function(req,res) {
 */
   //then do stuff to compare year and major? or display no matter what?  
 
-
+/*
   users.find(query1, {}, function(e, docs) {
     if (docs.length == 0) {
       //need to redirect to a demographic page where they'll enter more info
@@ -178,5 +178,5 @@ app.get('/compare/:id1/:id2', function(req,res) {
 
 
 });
-
+*/
 app.listen(process.env.PORT || 3000);
