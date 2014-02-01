@@ -18,7 +18,7 @@ var db = monk(mongoUri);
 app.get('/', function(req, res) {
   var users = db.get('users');
   users.find({}, {}, function(e, docs) {
-    res.send(docs);
+    res.send(docs[1]['likes']);
   });
 //  http.request("https://apis.scottylabs.org/v1/directory/andrewid/rparen?app_id=4dc26847-3962-47a6-aa50-dcd650e900b1&app_secret_key=_gH91EeosouyjtswFjR3SsmmCJkOWF93Lxb2LO1qdieZTpUqToYxGX4k", function(res1) {
   //  res.send(res1)
