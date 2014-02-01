@@ -75,7 +75,6 @@ app.post('/adduser/:id', function(req, res) {
     //but get stuff from andrew directory as well
   var users = db.get('users');
   var query = {'id': req.params.id};
-  //can i loop like this...?
   var key = '';
   var value = '';
   var new_user = {'id' : req.body.id,
@@ -83,9 +82,6 @@ app.post('/adduser/:id', function(req, res) {
                   'lname' : req.body.lname,
                   'info' : req.body.info
                  };
-  //var object = {id : req.body.id, info : req.body.info};
-  //users.insert(object, {safe : true}, function(err, records) {
-  //res.send(object);
   
   //now also add stuff to new_user from direcory
   var options = {
@@ -96,7 +92,7 @@ app.post('/adduser/:id', function(req, res) {
     var str='hai';
     res.send(response);
     console.log(str);
-  } 
+  }; 
 
   http.request(options, callback).end();
 
