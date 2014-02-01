@@ -82,11 +82,11 @@ app.post('/adduser/:id', function(req, res) {
   var new_user = {'id' : req.body.id,
                   'fname' : req.body.fname,
                   'lname' : req.body.lname,
-                  'info' : req.body.info,
+                  'hairColor' : req.body.hairColor,
+		  'height' : req.body.height,
                   'andrew' : req.body.andrew
                  };
 
-  var try1 = {'test1' : "hai"}
   //now also add stuff to new_user from direcory
   request.get("https://apis.scottylabs.org/v1/directory/andrewid/"+ req.body.andrew +"?app_id=4dc26847-3962-47a6-aa50-dcd650e900b1&app_secret_key=_gH91EeosouyjtswFjR3SsmmCJkOWF93Lxb2LO1qdieZTpUqToYxGX4k", function(response1) {
   //res.send(response1.body);
@@ -95,7 +95,6 @@ app.post('/adduser/:id', function(req, res) {
   var d  = p.person.department;
   new_user['year'] = year;
   new_user['dept'] = d;
-  //var disp1 = p['email'];
   res.send(new_user);
   users.insert(new_user, {safe : true}, function (err, records) {
 	res.send(new_user);
@@ -122,7 +121,7 @@ app.get('/getinfo/:id', function(req, res) {
     else {
     //now want to take all that info and send it back
     user1 = docs[0]
-    res.send(user1)
+    res.send([user1])
     }
 });
 });
