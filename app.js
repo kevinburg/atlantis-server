@@ -100,7 +100,7 @@ app.post('/adduser/:id', function(req, res) {
   //then add new_user to mongo
   //users.insert(new_user, {safe : trust}, function (err, records) {
   //res.send(new_user)
-  });
+  //});
 });
 
 
