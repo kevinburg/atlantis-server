@@ -16,6 +16,7 @@ app.get('/', function(req, res) {
   users.find({}, {}, function(e, docs) {
     res.send(docs);
   });
+  res.send('Hello world');
 });
 
 app.post('/login', function(req, res) {
