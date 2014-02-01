@@ -77,12 +77,12 @@ app.post('/adduser/:id', function(req, res) {
   var query = {'id': req.params.id};
   var key = '';
   var value = '';
-  var new_user = {'id' : req.body.id,
+/*  var new_user = {'id' : req.body.id,
                   'fname' : req.body.fname,
                   'lname' : req.body.lname,
                   'info' : req.body.info
                  };
-  
+*/
   //now also add stuff to new_user from direcory
   var options = {
     host: 'https://apis.scottylabs.org',
