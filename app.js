@@ -121,7 +121,7 @@ app.get('/getinfo/:id', function(req, res) {
     else {
     //now want to take all that info and send it back
     user1 = docs[0]
-    res.send(user1)
+    res.send([user1])
     }
 });
 
