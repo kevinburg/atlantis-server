@@ -124,6 +124,7 @@ app.get('/getinfo/:id', function(req, res) {
     res.send(user1)
     }
 });
+
 });
 
 
@@ -131,6 +132,49 @@ app.get('/compare/:id1/:id2', function(req,res) {
   var users = db.get('users');
   var query1 = {'id': req.params.id1};
   var query2 = {'id': req.params.id2};
+  //get big list of likes for each user
+  //the above id is the id linked with their fb account 
+
+
+  var user1 = users.find(query1)
+ // var list1 = user1[0]['likes']
+  var user2 = users.find(query2)
+ // var list2 = user2[0]['likes']
+ /* var simlikes = []
+  // now i have like two lists... iterate over
+  for (var item1 in list1) {
+    for (var item2 in list2) {
+      if item1 == item2 {
+      simlikes.push(item1);
+      };
+    };
+  };
+ */
+
+ //then either i can do something with simlikes arr or kevin can... like i just 
+// give him top 5 elems maybe. or os side decides on how many from their side?
+  
+  //also want to compare year and major if they are there
+/*  var maj = user1[0][dept]
+  var maj2 = user2[0][dept]
+  var year1 = user1[0][year]
+  var year2 = user2[0][year]  
+*/
+  //then do stuff to compare year and major? or display no matter what?  
+
+
+  users.find(query1, {}, function(e, docs) {
+    if (docs.length == 0) {
+      //need to redirect to a demographic page where they'll enter more info
+      //var object = {id : req.body.id, info : req.body.info};
+      //users.insert(object, {safe : true}, function(err, records) {
+	//res.send(object);
+      res.send([{'result' : '0'}]);
+      }
+    else {
+      res.send([{'result' : '1'}]);
+    }
+  });
 
 
 });
