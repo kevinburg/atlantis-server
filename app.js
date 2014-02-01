@@ -15,11 +15,10 @@ app.get('/', function(req, res) {
   var users = db.get('users');
   users.find({}, {}, function(e, docs) {
     res.send(docs);
-  });
-  res.send('Hello world');
+  }); 
 });
 
-app.post('/login', function(req, res) {
+app.post('/adduser', function(req, res) {
   var users = db.get('users');
   var query = {id : req.body.id};
   console.log('Login request received for id:', req.body.id);
