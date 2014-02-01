@@ -67,7 +67,7 @@ app.get('/logincheck/:id', function(req, res) {
   });
 });
 
-
+/*
 app.post('/adduser/:id', function(req, res) {
     //need to get user inf from request
     //everything is in req.body.id
@@ -102,7 +102,7 @@ app.post('/adduser/:id', function(req, res) {
   //res.send(new_user)
   //});
 });
-
+*/
 
 //GOOD WOO
 app.get('/getinfo/:id', function(req, res) {
